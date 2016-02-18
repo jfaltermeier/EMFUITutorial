@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Example Bowling Data Service
+Bundle-SymbolicName: org.eclipse.example.bowling.dataservice
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: eclipsesource.com
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.example.bowling.dataservice
+Require-Bundle: org.eclipse.example.bowling.model;bundle-version="[1.0.0,2.0.0)";visibility:=reexport

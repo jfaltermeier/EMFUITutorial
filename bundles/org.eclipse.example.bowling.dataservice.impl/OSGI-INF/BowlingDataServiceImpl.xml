@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<scr:component name="BowlingDataServiceImpl" xmlns:scr="http://www.osgi.org/xmlns/scr/v1.0.0">
+    <implementation class="org.eclipse.example.bowling.dataservice.impl.BowlingDataServiceImpl"/>
+    <service>
+        <provide interface="org.eclipse.example.bowling.dataservice.BowlingDataService"/>
+    </service>
+</scr:component>

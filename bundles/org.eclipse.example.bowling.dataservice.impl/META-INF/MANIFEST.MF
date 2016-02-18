@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Example Bowling Data Service Impl
+Bundle-SymbolicName: org.eclipse.example.bowling.dataservice.impl
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.example.bowling.dataservice;bundle-version="1.0.0",
+ org.eclipse.emf.edit
+Service-Component: OSGI-INF/BowlingDataServiceImpl.xml
+Import-Package: org.osgi.service.component.annotations
+Bundle-ActivationPolicy: lazy

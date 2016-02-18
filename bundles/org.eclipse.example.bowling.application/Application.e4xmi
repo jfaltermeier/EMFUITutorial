@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_iHe1ENVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_iHe1GdVzEeWQb9yhjVJGZQ">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_iHe1EdVzEeWQb9yhjVJGZQ" label="org.eclipse.example.bowling.application" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_iHe1MNVzEeWQb9yhjVJGZQ">
+      <children xsi:type="advanced:Perspective" xmi:id="_iHe1MdVzEeWQb9yhjVJGZQ">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_iHe1MtVzEeWQb9yhjVJGZQ" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_K-hrwNWPEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partsashcontainer.navigator" containerData="25" selectedElement="_s7RHwNVzEeWQb9yhjVJGZQ">
+            <children xsi:type="basic:Part" xmi:id="_s7RHwNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.part.leaguenavigator" containerData="" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.LeagueNavigatorPart" label="Players">
+              <toolbar xmi:id="_t9q_8NVzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.toolbar.leaguenavigator"/>
+            </children>
+            <children xsi:type="basic:Part" xmi:id="_pLi5cNWOEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.part.tournamentnavigator" containerData="" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.TournamentNavigatorPart" label="Match Ups">
+              <toolbar xmi:id="_pLi5cdWOEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.toolbar.tournamentnavigator"/>
+            </children>
+          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_iHe1M9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partstack.details" containerData="75">
+            <tags>editorPart</tags>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_iHe1KdVzEeWQb9yhjVJGZQ" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_iHe1KtVzEeWQb9yhjVJGZQ" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_iHe1LNVzEeWQb9yhjVJGZQ" label="Save" iconURI="platform:/plugin/org.eclipse.example.bowling.application/icons/save_edit.png" command="_iHe1I9VzEeWQb9yhjVJGZQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_iHe1LdVzEeWQb9yhjVJGZQ" label="Quit" command="_iHe1HNVzEeWQb9yhjVJGZQ"/>
+      </children>
+    </mainMenu>
+  </children>
+  <handlers xmi:id="_iHe1HdVzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handler.quitCommand" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handlers.QuitHandler" command="_iHe1HNVzEeWQb9yhjVJGZQ"/>
+  <handlers xmi:id="_iHe1JNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handler.saveCommand" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handlers.SaveHandler" command="_iHe1I9VzEeWQb9yhjVJGZQ"/>
+  <bindingTables xmi:id="_iHe1HtVzEeWQb9yhjVJGZQ" bindingContext="_iHe1GdVzEeWQb9yhjVJGZQ">
+    <bindings xmi:id="_iHe1H9VzEeWQb9yhjVJGZQ" keySequence="M1+Q" command="_iHe1HNVzEeWQb9yhjVJGZQ"/>
+    <bindings xmi:id="_iHe1ItVzEeWQb9yhjVJGZQ" keySequence="M1+O"/>
+    <bindings xmi:id="_iHe1JdVzEeWQb9yhjVJGZQ" keySequence="M1+S" command="_iHe1I9VzEeWQb9yhjVJGZQ"/>
+    <bindings xmi:id="_iHe1KNVzEeWQb9yhjVJGZQ" keySequence="M1+A"/>
+  </bindingTables>
+  <rootContext xmi:id="_iHe1GdVzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_iHe1GtVzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_iHe1G9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <descriptors xmi:id="_gTKiUNV0EeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partdescriptor.player" label="Player" tooltip="Shows a player" category="editorPart" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.PlayerPart"/>
+  <commands xmi:id="_iHe1HNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_iHe1I9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <addons xmi:id="_iHe1EtVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_iHe1E9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_iHe1FNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_iHe1FdVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_iHe1FtVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_iHe1F9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_iHe1GNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
