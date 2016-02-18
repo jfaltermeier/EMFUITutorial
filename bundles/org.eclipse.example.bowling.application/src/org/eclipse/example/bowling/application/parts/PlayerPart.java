@@ -19,9 +19,13 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 
+import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.internal.databinding.conversion.DateToStringConverter;
 import org.eclipse.core.internal.databinding.conversion.StringToDateConverter;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -31,7 +35,10 @@ import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.example.bowling.BowlingPackage;
 import org.eclipse.example.bowling.Player;
+import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
+import org.eclipse.jface.databinding.fieldassist.ControlDecorationUpdater;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -39,9 +46,11 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+@SuppressWarnings("restriction")
 public class PlayerPart {
 
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
@@ -77,31 +86,24 @@ public class PlayerPart {
 		new Label(parent, SWT.NULL).setText("Is Professional");
 		chkProfessional = new Button(parent, SWT.CHECK);
 
+		setupDatabinding(player);
+	}
+
+	protected void setupDatabinding(Player player) {
 		DataBindingContext databindingContext = new EMFDataBindingContext();
 		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(txtName),
 				EMFProperties.value(PLAYER_NAME).observe(player));
 
-		EMFUpdateValueStrategy t2s = new EMFUpdateValueStrategy();
-		t2s.setConverter(new StringToDateConverter() {
-			@Override
-			protected Date parse(String str) {
-				try {
-					return DATE_FORMAT.parse(str);
-				} catch (ParseException e) {
-					return super.parse(str);
-				}
-			}
-		});
-		EMFUpdateValueStrategy s2t = new EMFUpdateValueStrategy();
-		s2t.setConverter(new DateToStringConverter() {
-			@Override
-			protected String format(Date date) {
-				return DATE_FORMAT.format(date);
-			}
-		});
+		EMFUpdateValueStrategy stringToDateStrategy = new EMFUpdateValueStrategy();
+		stringToDateStrategy.setConverter(new StringToDateConverterWithDateFormat());
+		stringToDateStrategy.setAfterGetValidator(new DateValidator());
+		EMFUpdateValueStrategy dateToStringStrategy = new EMFUpdateValueStrategy();
+		dateToStringStrategy.setConverter(new DateToStringConverterWithDateFormat());
 
-		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(txtBirthDate),
-				EMFProperties.value(PLAYER_BIRTHDAY).observe(player), t2s, s2t);
+		Binding dateBinding = databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(txtBirthDate),
+				EMFProperties.value(PLAYER_BIRTHDAY).observe(player), stringToDateStrategy, dateToStringStrategy);
+		ControlDecorationSupport.create(dateBinding, SWT.TOP | SWT.LEFT, null,
+				new BackgroundSettingControlDecorationUpdater());
 
 		databindingContext.bindValue(WidgetProperties.selection().observe(chkProfessional),
 				EMFProperties.value(PLAYER_PROFESSIONAL).observe(player));
@@ -110,5 +112,47 @@ public class PlayerPart {
 	@Focus
 	public void setFocus() {
 		txtName.setFocus();
+	}
+
+	private final class BackgroundSettingControlDecorationUpdater extends ControlDecorationUpdater {
+		@Override
+		protected void update(ControlDecoration decoration, IStatus status) {
+			if (status.isOK()) {
+				decoration.getControl().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+			} else {
+				decoration.getControl().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+			}
+			super.update(decoration, status);
+		}
+	}
+
+	private final class DateValidator implements IValidator {
+		@Override
+		public IStatus validate(Object value) {
+			try {
+				DATE_FORMAT.parse((String) value);
+				return ValidationStatus.ok();
+			} catch (ParseException e) {
+				return ValidationStatus.error(value + " is not a valid date.");
+			}
+		}
+	}
+
+	private final class DateToStringConverterWithDateFormat extends DateToStringConverter {
+		@Override
+		protected String format(Date date) {
+			return DATE_FORMAT.format(date);
+		}
+	}
+
+	private final class StringToDateConverterWithDateFormat extends StringToDateConverter {
+		@Override
+		protected Date parse(String str) {
+			try {
+				return DATE_FORMAT.parse(str);
+			} catch (ParseException e) {
+				return super.parse(str);
+			}
+		}
 	}
 }
