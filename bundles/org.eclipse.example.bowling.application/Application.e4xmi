@@ -37,7 +37,7 @@
     <children xmi:id="_iHe1GtVzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_iHe1G9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
-  <descriptors xmi:id="_gTKiUNV0EeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partdescriptor.player" label="Player" tooltip="Shows a player" category="editorPart" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.PlayerPart"/>
+  <descriptors xmi:id="_gTKiUNV0EeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partdescriptor.player" label="Player" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/obj16/Player.gif" tooltip="Shows a player" category="editorPart" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.PlayerPart"/>
   <commands xmi:id="_iHe1HNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
   <commands xmi:id="_iHe1I9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
   <addons xmi:id="_iHe1EtVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
