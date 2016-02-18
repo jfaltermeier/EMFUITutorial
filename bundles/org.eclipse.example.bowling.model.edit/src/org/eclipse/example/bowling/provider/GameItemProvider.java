@@ -4,7 +4,9 @@ package org.eclipse.example.bowling.provider;
 
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -16,6 +18,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
@@ -24,6 +27,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.eclipse.example.bowling.BowlingPackage;
 import org.eclipse.example.bowling.Game;
+import org.eclipse.example.bowling.Player;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.example.bowling.Game} object.
@@ -120,16 +124,37 @@ public class GameItemProvider
 	public Object getImage(Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/Game"));
 	}
+	
+	private Set<Player> observedPlayers = new HashSet<Player>();
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Game_type");
+		Game game = (Game) object;
+		Player player = game.getPlayer();
+		if (player != null) {
+			PlayerItemProvider playerItemProvider = (PlayerItemProvider) adapterFactory.adapt(player,
+					PlayerItemProvider.class);
+			if (!observedPlayers.contains(player)) {
+				playerItemProvider.addListener(new INotifyChangedListener() {
+					@Override
+					public void notifyChanged(Notification notification) {
+						if (notification.getNotifier() == game.getPlayer()) {
+							fireNotifyChanged(new ViewerNotification(notification, game, false, true));
+						}
+					}
+				});
+				observedPlayers.add(player);
+			}
+			return "Game of " + playerItemProvider.getText(player);
+		} else {
+			return getString("_UI_Game_type");
+		}
 	}
 	
 
