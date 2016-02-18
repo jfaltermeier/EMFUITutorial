@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
@@ -15,7 +16,6 @@ import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -28,7 +28,6 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Menu;
 
 public abstract class AbstractNavigatorPart {
 
@@ -43,7 +42,7 @@ public abstract class AbstractNavigatorPart {
 	}
 
 	@PostConstruct
-	public void postConstruct(Composite parent) {
+	public void postConstruct(Composite parent, EMenuService menuService) {
 		parent.setLayout(new FillLayout());
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.BORDER);
 		GridData gridData = new GridData();
@@ -74,12 +73,9 @@ public abstract class AbstractNavigatorPart {
 			}
 		});
 
-		final MenuManager menuMgr = new MenuManager();
-		final Menu menu = menuMgr.createContextMenu(viewer.getControl());
-		// menuMgr.addMenuListener(new MainPartMenuListener(getViewer(),
-		// databaseService));
-		menuMgr.setRemoveAllWhenShown(true);
-		viewer.getControl().setMenu(menu);
+		if (getMenuId() != null && !getMenuId().isEmpty()) {
+			menuService.registerContextMenu(viewer.getControl(), getMenuId());
+		}
 
 		if (supportDragAndDrop()) {
 			EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(getInput());
@@ -91,6 +87,8 @@ public abstract class AbstractNavigatorPart {
 			}
 		}
 	}
+
+	abstract protected String getMenuId();
 
 	abstract protected EObject getInput();
 

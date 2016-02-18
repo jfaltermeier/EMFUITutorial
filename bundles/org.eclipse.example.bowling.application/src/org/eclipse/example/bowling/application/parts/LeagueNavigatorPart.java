@@ -10,12 +10,13 @@ import org.eclipse.example.bowling.dataservice.BowlingDataService;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 
 public class LeagueNavigatorPart extends AbstractNavigatorPart {
-	
+
 	private static final String PLAYER_PART = "org.eclipse.example.bowling.application.partdescriptor.player";
+	private static final String POPUPMENU_ID = "org.eclipse.example.bowling.application.popupmenu.leagueviewer";
 
 	@Inject
 	private BowlingDataService dataService;
-	
+
 	@Inject
 	private EPartService partService;
 
@@ -30,15 +31,18 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 		openPersonPart();
 	}
 
-	protected void closePersonPart() {
+	protected String getMenuId() {
+		return POPUPMENU_ID;
+	}
+
+	private void closePersonPart() {
 		MPart personPart = partService.findPart(PLAYER_PART);
 		if (personPart != null) {
 			partService.hidePart(personPart, true);
 		}
 	}
-	
-	protected MPart openPersonPart() {
+
+	private MPart openPersonPart() {
 		return partService.showPart(PLAYER_PART, PartState.ACTIVATE);
 	}
-	
 }

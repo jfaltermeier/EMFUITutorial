@@ -8,6 +8,8 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 
 public class TournamentNavigatorPart extends AbstractNavigatorPart {
 
+	private static final String POPUPMENU_ID = "org.eclipse.example.bowling.application.popupmenu.trounamentviewer";
+
 	@Inject
 	private BowlingDataService dataService;
 
@@ -15,7 +17,7 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 	protected EObject getInput() {
 		return dataService.getTournament();
 	}
-	
+
 	@Override
 	protected boolean supportDragAndDrop() {
 		return true;
@@ -24,7 +26,12 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 	@Override
 	protected void handleDoubleClick(DoubleClickEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
+	@Override
+	protected String getMenuId() {
+		return POPUPMENU_ID;
+	}
+
 }
