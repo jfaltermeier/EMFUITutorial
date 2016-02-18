@@ -7,7 +7,12 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
+import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
+import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.MenuManager;
@@ -18,6 +23,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -73,11 +80,25 @@ public abstract class AbstractNavigatorPart {
 		// databaseService));
 		menuMgr.setRemoveAllWhenShown(true);
 		viewer.getControl().setMenu(menu);
+
+		if (supportDragAndDrop()) {
+			EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(getInput());
+			if (editingDomain != null) {
+				int dndOps = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
+				Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance() };
+				viewer.addDragSupport(dndOps, transfers, new ViewerDragAdapter(viewer));
+				viewer.addDropSupport(dndOps, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));
+			}
+		}
 	}
 
 	abstract protected EObject getInput();
 
 	abstract protected void handleDoubleClick(DoubleClickEvent event);
+
+	protected boolean supportDragAndDrop() {
+		return false;
+	}
 
 	@Focus
 	public void setFocus() {

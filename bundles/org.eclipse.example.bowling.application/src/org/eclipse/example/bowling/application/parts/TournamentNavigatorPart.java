@@ -15,6 +15,11 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 	protected EObject getInput() {
 		return dataService.getTournament();
 	}
+	
+	@Override
+	protected boolean supportDragAndDrop() {
+		return true;
+	}
 
 	@Override
 	protected void handleDoubleClick(DoubleClickEvent event) {
