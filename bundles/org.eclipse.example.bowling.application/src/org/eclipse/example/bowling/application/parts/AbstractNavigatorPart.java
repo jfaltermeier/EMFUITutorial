@@ -44,7 +44,7 @@ public abstract class AbstractNavigatorPart {
 	@PostConstruct
 	public void postConstruct(Composite parent, EMenuService menuService) {
 		parent.setLayout(new FillLayout());
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.BORDER);
+		viewer = new TreeViewer(parent, SWT.BORDER);
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.verticalAlignment = SWT.FILL;
