@@ -5,6 +5,7 @@ import static org.eclipse.example.bowling.BowlingPackage.Literals.GAME__PLAYER;
 import static org.eclipse.example.bowling.BowlingPackage.Literals.LEAGUE__PLAYERS;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -45,6 +46,8 @@ public class GamePart {
 
 	private ComboViewer comboViewerPlayer;
 
+	private DataBindingContext databindingContext;
+
 	@PostConstruct
 	public void createComposite(Composite parent, MPart part, @Named(IServiceConstants.ACTIVE_SELECTION) Game game) {
 		parent.setLayout(new GridLayout(2, false));
@@ -57,7 +60,7 @@ public class GamePart {
 		IEMFListProperty playersObservableList = EMFProperties.list(LEAGUE__PLAYERS);
 		comboViewerPlayer.setInput(playersObservableList.observe(dataService.getLeage()));
 
-		DataBindingContext databindingContext = new EMFDataBindingContext();
+		databindingContext = new EMFDataBindingContext();
 		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(game);
 		databindingContext.bindValue(ViewerProperties.singleSelection().observe(comboViewerPlayer),
 				EMFEditProperties.value(editingDomain, GAME__PLAYER).observe(game));
@@ -83,6 +86,16 @@ public class GamePart {
 			composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		}
 		return composedAdapterFactory;
+	}
+	
+	@PreDestroy
+	public void dispose() {
+		if (composedAdapterFactory != null) {
+			composedAdapterFactory.dispose();
+		}
+		if (databindingContext != null) {
+			databindingContext.dispose();
+		}
 	}
 
 }

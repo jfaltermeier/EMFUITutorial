@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Named;
 
 import org.eclipse.core.databinding.Binding;
@@ -65,6 +66,8 @@ public class PlayerPart {
 	private Text txtBirthDate;
 	private Button chkProfessional;
 
+	private DataBindingContext databindingContext;
+
 	@PostConstruct
 	public void createComposite(Composite parent, MPart part,
 			@Named(IServiceConstants.ACTIVE_SELECTION) Player player) {
@@ -93,7 +96,7 @@ public class PlayerPart {
 	}
 
 	protected void setupDatabinding(Player player) {
-		DataBindingContext databindingContext = new EMFDataBindingContext();
+		databindingContext = new EMFDataBindingContext();
 		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(player);
 		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, txtName),
 				EMFEditProperties.value(editingDomain, PLAYER__NAME).observe(player));
@@ -118,6 +121,13 @@ public class PlayerPart {
 	@Focus
 	public void setFocus() {
 		txtName.setFocus();
+	}
+
+	@PreDestroy
+	public void dispose() {
+		if (databindingContext != null) {
+			databindingContext.dispose();
+		}
 	}
 
 	private final class BackgroundSettingControlDecorationUpdater extends ControlDecorationUpdater {

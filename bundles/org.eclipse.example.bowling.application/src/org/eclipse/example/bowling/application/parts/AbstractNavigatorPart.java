@@ -1,6 +1,7 @@
 package org.eclipse.example.bowling.application.parts;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
@@ -111,6 +112,13 @@ public abstract class AbstractNavigatorPart {
 			composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		}
 		return composedAdapterFactory;
+	}
+	
+	@PreDestroy
+	public void dispose() {
+		if (composedAdapterFactory != null) {
+			composedAdapterFactory.dispose();
+		}
 	}
 
 }
