@@ -39,14 +39,17 @@ import org.eclipse.swt.widgets.Text;
 public class GamePart {
 
 	private ComposedAdapterFactory composedAdapterFactory;
-
 	private ComboViewer comboViewerPlayer;
-
 	private DataBindingContext databindingContext;
 
 	@PostConstruct
 	public void createComposite(Composite parent, MPart part, BowlingDataService dataService,
 			@Named(IServiceConstants.ACTIVE_SELECTION) Game game) {
+		if (game == null) {
+			new Label(parent, SWT.NULL).setText("No game selected.");
+			return;
+		}
+
 		parent.setLayout(new GridLayout(2, false));
 
 		new Label(parent, SWT.NULL).setText("Player");
@@ -94,5 +97,4 @@ public class GamePart {
 			databindingContext.dispose();
 		}
 	}
-
 }
