@@ -6,7 +6,6 @@ import static org.eclipse.example.bowling.BowlingPackage.Literals.LEAGUE__PLAYER
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.databinding.DataBindingContext;
@@ -39,9 +38,6 @@ import org.eclipse.swt.widgets.Text;
 @SuppressWarnings("restriction")
 public class GamePart {
 
-	@Inject
-	private BowlingDataService dataService;
-
 	private ComposedAdapterFactory composedAdapterFactory;
 
 	private ComboViewer comboViewerPlayer;
@@ -49,7 +45,8 @@ public class GamePart {
 	private DataBindingContext databindingContext;
 
 	@PostConstruct
-	public void createComposite(Composite parent, MPart part, @Named(IServiceConstants.ACTIVE_SELECTION) Game game) {
+	public void createComposite(Composite parent, MPart part, BowlingDataService dataService,
+			@Named(IServiceConstants.ACTIVE_SELECTION) Game game) {
 		parent.setLayout(new GridLayout(2, false));
 
 		new Label(parent, SWT.NULL).setText("Player");
@@ -87,7 +84,7 @@ public class GamePart {
 		}
 		return composedAdapterFactory;
 	}
-	
+
 	@PreDestroy
 	public void dispose() {
 		if (composedAdapterFactory != null) {

@@ -2,7 +2,6 @@ package org.eclipse.example.bowling.application.parts;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.EMenuService;
@@ -32,9 +31,6 @@ import org.eclipse.swt.widgets.Composite;
 
 public abstract class AbstractNavigatorPart {
 
-	@Inject
-	private ESelectionService selectionService;
-
 	private TreeViewer viewer;
 	private ComposedAdapterFactory composedAdapterFactory;
 
@@ -43,7 +39,7 @@ public abstract class AbstractNavigatorPart {
 	}
 
 	@PostConstruct
-	public void postConstruct(Composite parent, EMenuService menuService) {
+	public void postConstruct(Composite parent, EMenuService menuService, ESelectionService selectionService) {
 		parent.setLayout(new FillLayout());
 		viewer = new TreeViewer(parent, SWT.BORDER);
 		GridData gridData = new GridData();
@@ -113,7 +109,7 @@ public abstract class AbstractNavigatorPart {
 		}
 		return composedAdapterFactory;
 	}
-	
+
 	@PreDestroy
 	public void dispose() {
 		if (composedAdapterFactory != null) {

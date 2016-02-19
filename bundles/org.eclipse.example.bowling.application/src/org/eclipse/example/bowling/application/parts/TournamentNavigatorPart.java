@@ -18,13 +18,16 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 	private static final String GAME_PART_ID = "org.eclipse.example.bowling.application.partdescriptor.game";
 	private static final String POPUPMENU_ID = "org.eclipse.example.bowling.application.popupmenu.trounamentviewer";
 
-	@Inject
 	private BowlingDataService dataService;
+	private EPartService partService;
+	private Game selectedGame;
 
 	@Inject
-	private EPartService partService;
-
-	private Game selectedGame;
+	public TournamentNavigatorPart(BowlingDataService dataService, EPartService partService) {
+		super();
+		this.dataService = dataService;
+		this.partService = partService;
+	}
 
 	@Override
 	protected EObject getInput() {

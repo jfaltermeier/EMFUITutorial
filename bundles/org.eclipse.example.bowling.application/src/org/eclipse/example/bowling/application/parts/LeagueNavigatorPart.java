@@ -14,11 +14,15 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 	private static final String PLAYER_PART_ID = "org.eclipse.example.bowling.application.partdescriptor.player";
 	private static final String POPUPMENU_ID = "org.eclipse.example.bowling.application.popupmenu.leagueviewer";
 
-	@Inject
 	private BowlingDataService dataService;
+	private EPartService partService;
 
 	@Inject
-	private EPartService partService;
+	public LeagueNavigatorPart(BowlingDataService dataService, EPartService partService) {
+		super();
+		this.dataService = dataService;
+		this.partService = partService;
+	}
 
 	@Override
 	protected EObject getInput() {
