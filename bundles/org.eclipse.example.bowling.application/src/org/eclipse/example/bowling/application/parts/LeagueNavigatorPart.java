@@ -11,7 +11,7 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 
 public class LeagueNavigatorPart extends AbstractNavigatorPart {
 
-	private static final String PLAYER_PART = "org.eclipse.example.bowling.application.partdescriptor.player";
+	private static final String PLAYER_PART_ID = "org.eclipse.example.bowling.application.partdescriptor.player";
 	private static final String POPUPMENU_ID = "org.eclipse.example.bowling.application.popupmenu.leagueviewer";
 
 	@Inject
@@ -31,18 +31,18 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 		openPersonPart();
 	}
 
-	protected String getMenuId() {
-		return POPUPMENU_ID;
-	}
-
 	private void closePersonPart() {
-		MPart personPart = partService.findPart(PLAYER_PART);
+		MPart personPart = partService.findPart(PLAYER_PART_ID);
 		if (personPart != null) {
 			partService.hidePart(personPart, true);
 		}
 	}
 
 	private MPart openPersonPart() {
-		return partService.showPart(PLAYER_PART, PartState.ACTIVATE);
+		return partService.showPart(PLAYER_PART_ID, PartState.ACTIVATE);
+	}
+
+	protected String getMenuId() {
+		return POPUPMENU_ID;
 	}
 }

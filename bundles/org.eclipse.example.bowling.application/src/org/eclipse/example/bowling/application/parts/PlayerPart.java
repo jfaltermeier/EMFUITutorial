@@ -11,6 +11,10 @@
  *******************************************************************************/
 package org.eclipse.example.bowling.application.parts;
 
+import static org.eclipse.example.bowling.BowlingPackage.Literals.PLAYER__DATE_OF_BIRTH;
+import static org.eclipse.example.bowling.BowlingPackage.Literals.PLAYER__NAME;
+import static org.eclipse.example.bowling.BowlingPackage.Literals.PLAYER__PROFESSIONAL;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,10 +34,10 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
-import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.example.bowling.BowlingPackage;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.example.bowling.Player;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationUpdater;
@@ -54,9 +58,8 @@ import org.eclipse.swt.widgets.Text;
 public class PlayerPart {
 
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-	private static final EAttribute PLAYER_NAME = BowlingPackage.eINSTANCE.getPlayer_Name();
-	private static final EAttribute PLAYER_BIRTHDAY = BowlingPackage.eINSTANCE.getPlayer_DateOfBirth();
-	private static final EAttribute PLAYER_PROFESSIONAL = BowlingPackage.eINSTANCE.getPlayer_Professional();
+
+	private static final int DELAY = 300;
 
 	private Text txtName;
 	private Text txtBirthDate;
@@ -91,8 +94,9 @@ public class PlayerPart {
 
 	protected void setupDatabinding(Player player) {
 		DataBindingContext databindingContext = new EMFDataBindingContext();
-		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(txtName),
-				EMFProperties.value(PLAYER_NAME).observe(player));
+		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(player);
+		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, txtName),
+				EMFEditProperties.value(editingDomain, PLAYER__NAME).observe(player));
 
 		EMFUpdateValueStrategy stringToDateStrategy = new EMFUpdateValueStrategy();
 		stringToDateStrategy.setConverter(new StringToDateConverterWithDateFormat());
@@ -100,13 +104,15 @@ public class PlayerPart {
 		EMFUpdateValueStrategy dateToStringStrategy = new EMFUpdateValueStrategy();
 		dateToStringStrategy.setConverter(new DateToStringConverterWithDateFormat());
 
-		Binding dateBinding = databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(txtBirthDate),
-				EMFProperties.value(PLAYER_BIRTHDAY).observe(player), stringToDateStrategy, dateToStringStrategy);
+		Binding dateBinding = databindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, txtBirthDate),
+				EMFEditProperties.value(editingDomain, PLAYER__DATE_OF_BIRTH).observe(player), stringToDateStrategy,
+				dateToStringStrategy);
 		ControlDecorationSupport.create(dateBinding, SWT.TOP | SWT.LEFT, null,
 				new BackgroundSettingControlDecorationUpdater());
 
 		databindingContext.bindValue(WidgetProperties.selection().observe(chkProfessional),
-				EMFProperties.value(PLAYER_PROFESSIONAL).observe(player));
+				EMFEditProperties.value(editingDomain, PLAYER__PROFESSIONAL).observe(player));
 	}
 
 	@Focus

@@ -163,7 +163,7 @@ public class GameItemProvider
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
@@ -171,6 +171,9 @@ public class GameItemProvider
 
 		switch (notification.getFeatureID(Game.class)) {
 			case BowlingPackage.GAME__FRAMES:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case BowlingPackage.GAME__PLAYER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
