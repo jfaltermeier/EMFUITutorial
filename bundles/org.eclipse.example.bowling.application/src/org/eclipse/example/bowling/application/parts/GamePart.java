@@ -38,6 +38,8 @@ import org.eclipse.swt.widgets.Text;
 @SuppressWarnings("restriction")
 public class GamePart {
 
+	private static final int DELAY = 400;
+	
 	private ComposedAdapterFactory composedAdapterFactory;
 	private ComboViewer comboViewerPlayer;
 	private DataBindingContext databindingContext;
@@ -73,11 +75,11 @@ public class GamePart {
 		Text txtFrame3 = new Text(framesComposite, SWT.BORDER);
 
 		IObservableList frameObservable = EMFEditProperties.list(editingDomain, GAME__FRAMES).observe(game);
-		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(400, txtFrame1),
+		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, txtFrame1),
 				new ECPObservableValue(frameObservable, 0, GAME__FRAMES.getEType().getInstanceClass()));
-		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(txtFrame2),
+		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, txtFrame2),
 				new ECPObservableValue(frameObservable, 1, GAME__FRAMES.getEType().getInstanceClass()));
-		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(txtFrame3),
+		databindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, txtFrame3),
 				new ECPObservableValue(frameObservable, 2, GAME__FRAMES.getEType().getInstanceClass()));
 	}
 
