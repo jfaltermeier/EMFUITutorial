@@ -23,7 +23,6 @@ public class AddMatchupHandler {
 		Command command = AddCommand.create(editingDomain, tournament, TOURNAMENT__MATCHUPS,
 				BOWLING_FACTORY.createMatchup());
 		editingDomain.getCommandStack().execute(command);
-
 	}
 
 }
