@@ -19,6 +19,9 @@ public class AddPlayerHandler {
 	@Execute
 	public void execute(BowlingDataService dataService) {
 		League leage = dataService.getLeage();
+		// Task: get editing domain
+		// Task: create AddCommand
+		// Task: execute AddCommand on the editing domain's command stack
 		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(leage);
 		Command command = AddCommand.create(editingDomain, leage, LEAGUE__PLAYERS, BOWLING_FACTORY.createPlayer());
 		editingDomain.getCommandStack().execute(command);

@@ -4,15 +4,13 @@ package org.eclipse.example.bowling.provider;
 
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,7 +22,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.example.bowling.BowlingPackage;
 import org.eclipse.example.bowling.Game;
 import org.eclipse.example.bowling.Player;
@@ -125,7 +122,8 @@ public class GameItemProvider
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/Game"));
 	}
 	
-	private Set<Player> observedPlayers = new HashSet<Player>();
+	private Map<Game, Player> observedPlayers = new HashMap<Game, Player>();
+	private Map<Game, INotifyChangedListener> installedListeners = new HashMap<Game, INotifyChangedListener>();
 
 	/**
 	 * This returns the label text for the adapted class.
@@ -136,27 +134,44 @@ public class GameItemProvider
 	@Override
 	public String getText(Object object) {
 		Game game = (Game) object;
-		Player player = game.getPlayer();
-		if (player != null) {
-			PlayerItemProvider playerItemProvider = (PlayerItemProvider) adapterFactory.adapt(player,
-					PlayerItemProvider.class);
-			if (!observedPlayers.contains(player)) {
-				playerItemProvider.addListener(new INotifyChangedListener() {
-					@Override
-					public void notifyChanged(Notification notification) {
-						if (notification.getNotifier() == game.getPlayer()) {
-							fireNotifyChanged(new ViewerNotification(notification, game, false, true));
-						}
-					}
-				});
-				observedPlayers.add(player);
+		Player currentPlayer = game.getPlayer();
+		Player observedPlayer = observedPlayers.get(game);
+		INotifyChangedListener listener = installedListeners.get(game);
+		if (observedPlayer != currentPlayer) {
+			if (observedPlayer != null) {
+				getPlayerItemProvider(observedPlayer).removeListener(listener);
+				observedPlayers.remove(game);
+				installedListeners.remove(listener);
 			}
-			return "Game of " + playerItemProvider.getText(player);
+			if (currentPlayer != null) {
+				listener = createNotificationListener(game);
+				getPlayerItemProvider(currentPlayer).addListener(listener);
+				observedPlayers.put(game, currentPlayer);
+				installedListeners.put(game, listener);
+				
+			}
+		}
+		if (currentPlayer != null) {
+			return "Game of " + getPlayerItemProvider(currentPlayer).getText(currentPlayer);
 		} else {
 			return getString("_UI_Game_type");
 		}
 	}
-	
+
+	private PlayerItemProvider getPlayerItemProvider(Player player) {
+		return (PlayerItemProvider) adapterFactory.adapt(player, PlayerItemProvider.class);
+	}
+
+	private INotifyChangedListener createNotificationListener(Game game) {
+		return new INotifyChangedListener() {
+			@Override
+			public void notifyChanged(Notification notification) {
+				if (notification.getNotifier() == game.getPlayer()) {
+					fireNotifyChanged(new ViewerNotification(notification, game, false, true));
+				}
+			}
+		};
+	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

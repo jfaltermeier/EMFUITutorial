@@ -17,6 +17,9 @@ public class DeleteEObjectHandler {
 
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) EObject eObject) {
+		// Task: get editing domain from selected eObject
+		// Task: create DeleteCommand
+		// Task: execute DeleteCommand on the editing domain's command stack
 		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(eObject);
 		Command command = DeleteCommand.create(editingDomain, eObject);
 		editingDomain.getCommandStack().execute(command);
@@ -26,5 +29,4 @@ public class DeleteEObjectHandler {
 	public boolean canExecute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) EObject eObject) {
 		return eObject != null;
 	}
-
 }
