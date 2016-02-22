@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org.eclipse.emf.ecp.view.model:View xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.eclipse.emf.ecp.view.model="http://org/eclipse/emf/ecp/view/model/170" xmi:id="_dvERwNlBEeWjIO3ThlGYRw" name="Player" ecorePath="/org.eclipse.example.bowling.model/model/bowling.ecore">
+  <rootEClass href="http://www.eclipse.org/example/bowling/1.0#//Player"/>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_9RLQ0NlFEeWjIO3ThlGYRw" name="Control name">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_9RLQ0dlFEeWjIO3ThlGYRw">
+      <domainModelEFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/example/bowling/1.0#//Player/name"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_9RTMoNlFEeWjIO3ThlGYRw" name="Control dateOfBirth">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_9RTModlFEeWjIO3ThlGYRw">
+      <domainModelEFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/example/bowling/1.0#//Player/dateOfBirth"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_9RWP8NlFEeWjIO3ThlGYRw" name="Control professional">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_9RWP8dlFEeWjIO3ThlGYRw">
+      <domainModelEFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/example/bowling/1.0#//Player/professional"/>
+    </domainModelReference>
+  </children>
+</org.eclipse.emf.ecp.view.model:View>
