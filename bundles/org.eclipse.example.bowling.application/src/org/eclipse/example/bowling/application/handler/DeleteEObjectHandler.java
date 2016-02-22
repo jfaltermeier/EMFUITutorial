@@ -12,9 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.example.bowling.Game;
-import org.eclipse.example.bowling.Matchup;
-import org.eclipse.example.bowling.Player;
 
 public class DeleteEObjectHandler {
 
@@ -27,7 +24,7 @@ public class DeleteEObjectHandler {
 
 	@CanExecute
 	public boolean canExecute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) EObject eObject) {
-		return eObject instanceof Player || eObject instanceof Game || eObject instanceof Matchup;
+		return eObject != null;
 	}
 
 }

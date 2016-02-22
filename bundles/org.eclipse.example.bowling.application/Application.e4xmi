@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_iHe1ENVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_iHe1GdVzEeWQb9yhjVJGZQ">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_iHe1EdVzEeWQb9yhjVJGZQ" label="Example Bowling Application" iconURI="platform:/plugin/org.eclipse.example.bowling.application/icons/bowling.png" width="500" height="400">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_iHe1EdVzEeWQb9yhjVJGZQ" label="Example Bowling Application" iconURI="platform:/plugin/org.eclipse.example.bowling.application/icons/bowling.png" width="640" height="400">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_iHe1MNVzEeWQb9yhjVJGZQ">
       <children xsi:type="advanced:Perspective" xmi:id="_iHe1MdVzEeWQb9yhjVJGZQ">
         <children xsi:type="basic:PartSashContainer" xmi:id="_iHe1MtVzEeWQb9yhjVJGZQ" horizontal="true">
-          <children xsi:type="basic:PartSashContainer" xmi:id="_K-hrwNWPEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partsashcontainer.navigator" containerData="25" selectedElement="_s7RHwNVzEeWQb9yhjVJGZQ">
-            <children xsi:type="basic:Part" xmi:id="_s7RHwNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.part.leaguenavigator" containerData="" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.LeagueNavigatorPart" label="Players">
-              <menus xsi:type="menu:PopupMenu" xmi:id="_CzbX4NZmEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.popupmenu.leagueviewer">
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_GtcWYNZmEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handledmenuitem.addplayer" label="Add Player" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/ctool16/CreateLeague_players_Player.gif" tooltip="Add player to the league" command="_85l-ENZiEeWQb9yhjVJGZQ"/>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_fTraYNZoEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handledmenuitem.deleteplayer" label="Delete Player" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/delete.png" tooltip="Deletes a player from the league" enabled="false" command="_Gpf_oNZoEeWQb9yhjVJGZQ"/>
-              </menus>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_K-hrwNWPEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partsashcontainer.navigator" containerData="40">
+            <children xsi:type="basic:PartStack" xmi:id="_3cw20Nl0EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.partstack.leaguenavigator" selectedElement="_s7RHwNVzEeWQb9yhjVJGZQ">
+              <children xsi:type="basic:Part" xmi:id="_s7RHwNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.part.leaguenavigator" containerData="" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.LeagueNavigatorPart" label="Players" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/obj16/Player.gif" tooltip="Shows the players of the league.">
+                <toolbar xmi:id="_QGolANl0EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.toolbar.0">
+                  <children xsi:type="menu:HandledToolItem" xmi:id="_Sc4qsNl0EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.handledtoolitem.addplayer" label="Add Player" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/ctool16/CreateLeague_players_Player.gif" tooltip="Add player to the league" command="_85l-ENZiEeWQb9yhjVJGZQ"/>
+                  <children xsi:type="menu:HandledToolItem" xmi:id="_yut94Nl1EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.handledtoolitem.deleteplayer" label="Delete Player" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/delete.png" tooltip="Delete a player from the league" enabled="false" command="_Gpf_oNZoEeWQb9yhjVJGZQ"/>
+                </toolbar>
+              </children>
             </children>
-            <children xsi:type="basic:Part" xmi:id="_pLi5cNWOEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.part.tournamentnavigator" containerData="" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.TournamentNavigatorPart" label="Match Ups">
-              <menus xsi:type="menu:PopupMenu" xmi:id="_eaD4gNZtEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.popupmenu.trounamentviewer">
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_tc-eENZtEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handledmenuitem.addmatchup" label="Add Matchup" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/ctool16/CreateTournament_matchups_Matchup.gif" tooltip="Adds a matchup to the tournament" command="__-vKENZiEeWQb9yhjVJGZQ"/>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_6OUpoNZtEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handledmenuitem.addgame" label="Add Game" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/ctool16/CreateMatchup_games_Game.gif" tooltip="Adds a game to the matchup" enabled="false" command="_CqoIkNZjEeWQb9yhjVJGZQ"/>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_yRR6kNZtEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handledmenuitem.delete" label="Delete" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/delete.png" tooltip="Deletes the selected object" enabled="false" command="_Gpf_oNZoEeWQb9yhjVJGZQ"/>
-              </menus>
+            <children xsi:type="basic:PartStack" xmi:id="_H6R8sNl2EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.partstack.tournamentnavigator" selectedElement="_pLi5cNWOEeWQb9yhjVJGZQ">
+              <children xsi:type="basic:Part" xmi:id="_pLi5cNWOEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.part.tournamentnavigator" containerData="" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.TournamentNavigatorPart" label="Match Ups">
+                <menus xsi:type="menu:PopupMenu" xmi:id="_eaD4gNZtEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.popupmenu.trounamentviewer">
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_6OUpoNZtEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handledmenuitem.addgame" label="Add Game" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/ctool16/CreateMatchup_games_Game.gif" tooltip="Add a game to the matchup" enabled="false" command="_CqoIkNZjEeWQb9yhjVJGZQ"/>
+                </menus>
+                <toolbar xmi:id="_QRuv0Nl2EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.toolbar.1">
+                  <children xsi:type="menu:HandledToolItem" xmi:id="_RSqBUNl2EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.handledtoolitem.addmatchup" label="Add Matchup" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/ctool16/CreateTournament_matchups_Matchup.gif" tooltip="Add a matchup to the tournament" command="__-vKENZiEeWQb9yhjVJGZQ"/>
+                  <children xsi:type="menu:HandledToolItem" xmi:id="_Utsk0Nl2EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.handledtoolitem.delete" label="Delete" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/delete.png" tooltip="Delete the selected object" enabled="false" command="_ToKDoNl3EeW5KtAMwo-Raw"/>
+                </toolbar>
+              </children>
             </children>
           </children>
-          <children xsi:type="basic:PartStack" xmi:id="_iHe1M9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partstack.details" containerData="75">
+          <children xsi:type="basic:PartStack" xmi:id="_iHe1M9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partstack.details" containerData="60">
             <tags>editorPart</tags>
           </children>
         </children>
@@ -27,9 +33,10 @@
     </children>
   </children>
   <handlers xmi:id="_Dp-QQNZkEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handler.addplayer" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handler.AddPlayerHandler" command="_85l-ENZiEeWQb9yhjVJGZQ"/>
-  <handlers xmi:id="_MFV9QNZoEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handler.deleteeobject" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handler.DeleteEObjectHandler" command="_Gpf_oNZoEeWQb9yhjVJGZQ"/>
+  <handlers xmi:id="_MFV9QNZoEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handler.deleteplayer" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handler.DeletePlayerHandler" command="_Gpf_oNZoEeWQb9yhjVJGZQ"/>
   <handlers xmi:id="_bHZkANZkEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handler.addmatchup" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handler.AddMatchupHandler" command="__-vKENZiEeWQb9yhjVJGZQ"/>
   <handlers xmi:id="_pI7lENZkEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.handler.addgame" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handler.AddGameHandler" command="_CqoIkNZjEeWQb9yhjVJGZQ"/>
+  <handlers xmi:id="_PGU3MNl3EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.handler.deletematchuporgame" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.handler.DeleteMatchupOrGameHandler" command="_ToKDoNl3EeW5KtAMwo-Raw"/>
   <bindingTables xmi:id="_iHe1HtVzEeWQb9yhjVJGZQ" bindingContext="_iHe1GdVzEeWQb9yhjVJGZQ">
     <bindings xmi:id="_iHe1H9VzEeWQb9yhjVJGZQ" keySequence="M1+Q"/>
     <bindings xmi:id="_iHe1ItVzEeWQb9yhjVJGZQ" keySequence="M1+O"/>
@@ -43,9 +50,10 @@
   <descriptors xmi:id="_gTKiUNV0EeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partdescriptor.player" label="Player" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/obj16/Player.gif" tooltip="Shows a player" category="editorPart" closeable="true" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.PlayerPart"/>
   <descriptors xmi:id="_nQAr4NZ1EeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.partdescriptor.game" label="Game" iconURI="platform:/plugin/org.eclipse.example.bowling.model.edit/icons/full/obj16/Game.gif" tooltip="Shows a game" category="editorPart" closeable="true" contributionURI="bundleclass://org.eclipse.example.bowling.application/org.eclipse.example.bowling.application.parts.GamePart"/>
   <commands xmi:id="_85l-ENZiEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.command.addplayer" commandName="Add Player" description="Adds a player to the league"/>
-  <commands xmi:id="_Gpf_oNZoEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.command.deleteeobject" commandName="Delete EObject" description="Deletes the selected EObject"/>
+  <commands xmi:id="_Gpf_oNZoEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.command.deleteplayer" commandName="Delete Player" description="Deletes the selected Player"/>
   <commands xmi:id="__-vKENZiEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.command.addmatchup" commandName="Add Matchup" description="Adds a matchup to the tournament"/>
   <commands xmi:id="_CqoIkNZjEeWQb9yhjVJGZQ" elementId="org.eclipse.example.bowling.application.command.addgame" commandName="Add Game" description="Adds a game to the matchup"/>
+  <commands xmi:id="_ToKDoNl3EeW5KtAMwo-Raw" elementId="org.eclipse.example.bowling.application.command.deletematchuporgame" commandName="Delete Matchup Or Game"/>
   <addons xmi:id="_iHe1EtVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_iHe1E9VzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_iHe1FNVzEeWQb9yhjVJGZQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
