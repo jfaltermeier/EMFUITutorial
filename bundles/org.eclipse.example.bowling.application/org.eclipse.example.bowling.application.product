@@ -93,6 +93,8 @@
       <plugin id="org.eclipse.emf.ecp.view.context"/>
       <plugin id="org.eclipse.emf.ecp.view.context.locale"/>
       <plugin id="org.eclipse.emf.ecp.view.core.swt"/>
+      <plugin id="org.eclipse.emf.ecp.view.horizontal.model"/>
+      <plugin id="org.eclipse.emf.ecp.view.horizontal.ui.swt"/>
       <plugin id="org.eclipse.emf.ecp.view.indexdmr.model"/>
       <plugin id="org.eclipse.emf.ecp.view.keyattributedmr.model"/>
       <plugin id="org.eclipse.emf.ecp.view.mappingdmr.model"/>

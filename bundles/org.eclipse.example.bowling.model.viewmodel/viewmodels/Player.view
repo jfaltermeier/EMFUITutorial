@@ -6,6 +6,16 @@
       <domainModelEFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/example/bowling/1.0#//Player/name"/>
     </domainModelReference>
   </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_jvb3wNlMEeW4h8oyMgzUQA" name="Control height">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_mhH8QNlMEeW4h8oyMgzUQA">
+      <domainModelEFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/example/bowling/1.0#//Player/height"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_cz9TYNlMEeW4h8oyMgzUQA" name="Control gender">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_gsttoNlMEeW4h8oyMgzUQA">
+      <domainModelEFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/example/bowling/1.0#//Player/gender"/>
+    </domainModelReference>
+  </children>
   <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_9RTMoNlFEeWjIO3ThlGYRw" name="Control dateOfBirth">
     <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_9RTModlFEeWjIO3ThlGYRw">
       <domainModelEFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/example/bowling/1.0#//Player/dateOfBirth"/>
