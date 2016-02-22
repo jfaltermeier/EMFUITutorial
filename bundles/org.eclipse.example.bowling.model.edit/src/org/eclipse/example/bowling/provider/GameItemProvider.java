@@ -148,7 +148,6 @@ public class GameItemProvider
 				getPlayerItemProvider(currentPlayer).addListener(listener);
 				observedPlayers.put(game, currentPlayer);
 				installedListeners.put(game, listener);
-				
 			}
 		}
 		if (currentPlayer != null) {
