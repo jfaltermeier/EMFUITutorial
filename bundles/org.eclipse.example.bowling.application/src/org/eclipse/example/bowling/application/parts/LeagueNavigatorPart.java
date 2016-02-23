@@ -5,7 +5,6 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
@@ -25,7 +24,6 @@ import org.eclipse.swt.widgets.Composite;
 public class LeagueNavigatorPart extends AbstractNavigatorPart {
 
 	private static final String PLAYER_PART_ID = "org.eclipse.example.bowling.application.partdescriptor.player";
-	private static final String POPUPMENU_ID = "org.eclipse.example.bowling.application.popupmenu.leagueviewer";
 
 	private EPartService partService;
 
@@ -39,8 +37,7 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 	}
 
 	@PostConstruct
-	public void postConstruct(Composite parent, BowlingDataService dataService, EMenuService menuService,
-			ESelectionService selectionService) {
+	public void postConstruct(Composite parent, BowlingDataService dataService, ESelectionService selectionService) {
 		parent.setLayout(new FillLayout());
 		viewer = new TreeViewer(parent, SWT.SINGLE);
 		GridData gridData = new GridData();
@@ -62,7 +59,6 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 		enableDragAndDrop(viewer, AdapterFactoryEditingDomain.getEditingDomainFor(league));
 
 		installSelectionForwardingListener(viewer, selectionService);
-		menuService.registerContextMenu(viewer.getControl(), POPUPMENU_ID);
 		viewer.addDoubleClickListener(new ExpandingDoubleClickListener() {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
@@ -100,9 +96,5 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 
 	private MPart openPersonPart() {
 		return partService.showPart(PLAYER_PART_ID, PartState.ACTIVATE);
-	}
-
-	protected String getMenuId() {
-		return POPUPMENU_ID;
 	}
 }

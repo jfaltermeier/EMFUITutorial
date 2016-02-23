@@ -7,7 +7,6 @@ import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
@@ -29,7 +28,6 @@ import org.eclipse.swt.widgets.Composite;
 public class TournamentNavigatorPart extends AbstractNavigatorPart {
 
 	private static final String GAME_PART_ID = "org.eclipse.example.bowling.application.partdescriptor.game";
-	private static final String POPUPMENU_ID = "org.eclipse.example.bowling.application.popupmenu.trounamentviewer";
 
 	private Game selectedGame;
 
@@ -45,8 +43,7 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 	}
 
 	@PostConstruct
-	public void postConstruct(Composite parent, BowlingDataService dataService, EMenuService menuService,
-			ESelectionService selectionService) {
+	public void postConstruct(Composite parent, BowlingDataService dataService, ESelectionService selectionService) {
 		parent.setLayout(new FillLayout());
 		viewer = new TreeViewer(parent, SWT.SINGLE);
 		GridData gridData = new GridData();
@@ -68,7 +65,6 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 		enableDragAndDrop(viewer, AdapterFactoryEditingDomain.getEditingDomainFor(tournament));
 
 		installSelectionForwardingListener(viewer, selectionService);
-		menuService.registerContextMenu(viewer.getControl(), POPUPMENU_ID);
 		viewer.addDoubleClickListener(new ExpandingDoubleClickListener() {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
