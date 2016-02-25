@@ -8,6 +8,7 @@ import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.example.bowling.BowlingFactory;
 import org.eclipse.example.bowling.Game;
@@ -26,6 +27,7 @@ public class BowlingDataServiceImpl implements BowlingDataService {
 	private Tournament tournament;
 	private Resource resource;
 	private ComposedAdapterFactory composedAdapterFactory;
+	private EditingDomain editingDomain;
 
 	@Override
 	public League getLeage() {
@@ -47,8 +49,7 @@ public class BowlingDataServiceImpl implements BowlingDataService {
 
 	private Resource getResource() {
 		if (resource == null) {
-			AdapterFactoryEditingDomain editingDomain = new AdapterFactoryEditingDomain(getAdapterFactory(),
-					new BasicCommandStack());
+			EditingDomain editingDomain = getEditingDomain();
 			resource = editingDomain.createResource("bowling.xmi");
 		}
 		return resource;
@@ -153,6 +154,14 @@ public class BowlingDataServiceImpl implements BowlingDataService {
 		tournament.getMatchups().add(matchup1);
 		tournament.getMatchups().add(matchup2);
 		return tournament;
+	}
+
+	@Override
+	public EditingDomain getEditingDomain() {
+		if (editingDomain == null) {
+			editingDomain = new AdapterFactoryEditingDomain(getAdapterFactory(), new BasicCommandStack());
+		}
+		return editingDomain;
 	}
 
 }

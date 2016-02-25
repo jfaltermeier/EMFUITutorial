@@ -29,16 +29,15 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.databinding.edit.IEMFEditValueProperty;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.example.bowling.Gender;
 import org.eclipse.example.bowling.Player;
+import org.eclipse.example.bowling.dataservice.BowlingDataService;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationUpdater;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
@@ -75,7 +74,7 @@ public class PlayerPart {
 
 	@PostConstruct
 	public void createComposite(Composite parent, MPart part,
-			@Named(IServiceConstants.ACTIVE_SELECTION) Player player) {
+			@Named(IServiceConstants.ACTIVE_SELECTION) Player player, BowlingDataService dataService) {
 		if (player == null) {
 			new Label(parent, SWT.NULL).setText("No player selected.");
 			return;
@@ -108,15 +107,14 @@ public class PlayerPart {
 
 		new Label(parent, SWT.NULL).setText("Is Professional");
 		chkProfessional = new Button(parent, SWT.CHECK);
+		EditingDomain editingDomain = dataService.getEditingDomain();
 
-		setupDatabinding(player);
+		setupDatabinding(player, editingDomain);
 	}
 
-	protected void setupDatabinding(Player player) {
+	protected void setupDatabinding(Player player, EditingDomain editingDomain) {
 
-		databindingContext = new EMFDataBindingContext();
 
-		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(player);
 
 		IWidgetValueProperty txtModifyPropery = WidgetProperties.text(SWT.Modify);
 		IEMFEditValueProperty playerNameProperty = EMFEditProperties.value(editingDomain, PLAYER__NAME);

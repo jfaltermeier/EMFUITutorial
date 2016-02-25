@@ -6,7 +6,6 @@ import static org.eclipse.example.bowling.BowlingPackage.Literals.LEAGUE__PLAYER
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.AddCommand;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.example.bowling.BowlingFactory;
 import org.eclipse.example.bowling.League;
@@ -22,7 +21,7 @@ public class AddPlayerHandler {
 		// Task: get editing domain
 		// Task: create AddCommand
 		// Task: execute AddCommand on the editing domain's command stack
-		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(leage);
+		EditingDomain editingDomain = dataService.getEditingDomain();
 		Command command = AddCommand.create(editingDomain, leage, LEAGUE__PLAYERS, BOWLING_FACTORY.createPlayer());
 		editingDomain.getCommandStack().execute(command);
 	}

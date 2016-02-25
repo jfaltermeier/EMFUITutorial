@@ -11,7 +11,6 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -62,7 +61,7 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 		Tournament tournament = dataService.getTournament();
 		viewer.setInput(tournament);
 
-		enableDragAndDrop(viewer, AdapterFactoryEditingDomain.getEditingDomainFor(tournament));
+		enableDragAndDrop(viewer, dataService.getEditingDomain());
 
 		installSelectionForwardingListener(viewer, selectionService);
 		viewer.addDoubleClickListener(new ExpandingDoubleClickListener() {

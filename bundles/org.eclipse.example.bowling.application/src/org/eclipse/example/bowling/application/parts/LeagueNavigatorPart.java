@@ -8,7 +8,6 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -56,7 +55,7 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 		League league = dataService.getLeage();
 		viewer.setInput(league);
 
-		enableDragAndDrop(viewer, AdapterFactoryEditingDomain.getEditingDomainFor(league));
+		enableDragAndDrop(viewer, dataService.getEditingDomain());
 
 		installSelectionForwardingListener(viewer, selectionService);
 		viewer.addDoubleClickListener(new ExpandingDoubleClickListener() {

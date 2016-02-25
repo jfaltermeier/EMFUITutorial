@@ -18,7 +18,6 @@ import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.IEMFListProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.ecp.edit.internal.swt.util.ECPObservableValue;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -63,7 +62,7 @@ public class GamePart {
 		comboViewerPlayer.setInput(playersObservableList.observe(dataService.getLeage()));
 
 		databindingContext = new EMFDataBindingContext();
-		EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(game);
+		EditingDomain editingDomain = dataService.getEditingDomain();
 		databindingContext.bindValue(ViewerProperties.singleSelection().observe(comboViewerPlayer),
 				EMFEditProperties.value(editingDomain, GAME__PLAYER).observe(game));
 
