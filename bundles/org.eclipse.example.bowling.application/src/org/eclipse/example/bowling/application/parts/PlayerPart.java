@@ -29,6 +29,7 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.databinding.edit.IEMFEditValueProperty;
@@ -113,8 +114,7 @@ public class PlayerPart {
 	}
 
 	protected void setupDatabinding(Player player, EditingDomain editingDomain) {
-
-
+		databindingContext = new EMFDataBindingContext();
 
 		IWidgetValueProperty txtModifyPropery = WidgetProperties.text(SWT.Modify);
 		IEMFEditValueProperty playerNameProperty = EMFEditProperties.value(editingDomain, PLAYER__NAME);
