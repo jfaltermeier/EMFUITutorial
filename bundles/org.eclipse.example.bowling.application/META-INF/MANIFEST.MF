@@ -24,7 +24,9 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.example.bowling.model.edit;bundle-version="1.0.0",
  org.eclipse.ui;bundle-version="3.107.0.v20150507-1945",
  org.eclipse.emf.databinding.edit,
- org.eclipse.emf.ecp.edit.swt;bundle-version="1.7.2"
+ org.eclipse.emf.ecp.edit.swt;bundle-version="1.7.2",
+ org.eclipse.emfforms.swt.treemasterdetail;bundle-version="1.7.2",
+ org.eclipse.emf.ecp.common;bundle-version="1.7.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.annotation;version="1.0.0";resolution:=optional,
  javax.inject;version="1.0.0"

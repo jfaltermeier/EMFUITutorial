@@ -14,16 +14,17 @@ import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emfforms.internal.swt.treemasterdetail.defaultprovider.DefaultMenuProvider;
 import org.eclipse.example.bowling.Game;
 import org.eclipse.example.bowling.Tournament;
 import org.eclipse.example.bowling.dataservice.BowlingDataService;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 
+@SuppressWarnings("restriction") // DefaultMenuProvider will be public API in 1.9
 public class TournamentNavigatorPart extends AbstractNavigatorPart {
 
 	private static final String GAME_PART_ID = "org.eclipse.example.bowling.application.partdescriptor.game";
@@ -43,14 +44,7 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 
 	@PostConstruct
 	public void postConstruct(Composite parent, BowlingDataService dataService, ESelectionService selectionService) {
-		parent.setLayout(new FillLayout());
 		viewer = new TreeViewer(parent, SWT.SINGLE);
-		GridData gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
-		gridData.verticalAlignment = SWT.FILL;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		viewer.getControl().setLayoutData(gridData);
 
 		// Task: set content and label provider
 		composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -71,6 +65,11 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 				handleDoubleClick(event);
 			}
 		});
+		
+		// 
+		DefaultMenuProvider d = new DefaultMenuProvider();
+		Menu menu = d.getMenu(viewer, dataService.getEditingDomain());
+		viewer.getControl().setMenu(menu);
 	}
 
 	@PreDestroy
