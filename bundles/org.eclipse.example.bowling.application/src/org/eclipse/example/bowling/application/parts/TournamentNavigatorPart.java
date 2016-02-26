@@ -66,7 +66,7 @@ public class TournamentNavigatorPart extends AbstractNavigatorPart {
 			}
 		});
 		
-		// 
+		// Add default child creation and deletion actions to the popup menu
 		DefaultMenuProvider d = new DefaultMenuProvider();
 		Menu menu = d.getMenu(viewer, dataService.getEditingDomain());
 		viewer.getControl().setMenu(menu);

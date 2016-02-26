@@ -17,8 +17,8 @@ public class DeleteEObjectHandler {
 
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) EObject eObject, BowlingDataService dataService) {
-		// Task: get editing domain from selected eObject
-		// Task: create DeleteCommand
+		// Task: get editing domain from dataService
+		// Task: create DeleteCommand for deleting eObject
 		// Task: execute DeleteCommand on the editing domain's command stack
 		EditingDomain editingDomain = dataService.getEditingDomain();
 		Command command = DeleteCommand.create(editingDomain, eObject);

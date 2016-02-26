@@ -18,8 +18,8 @@ public class AddMatchupHandler {
 	@Execute
 	public void execute(BowlingDataService dataService) {
 		Tournament tournament = dataService.getTournament();
-		// Task: get editing domain
-		// Task: create AddCommand
+		// Task: get editing domain from dataService
+		// Task: create AddCommand for adding a Matchup to tournament
 		// Task: execute AddCommand on the editing domain's command stack
 		EditingDomain editingDomain = dataService.getEditingDomain();
 		Command command = AddCommand.create(editingDomain, tournament, TOURNAMENT__MATCHUPS,

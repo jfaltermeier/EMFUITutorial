@@ -17,12 +17,12 @@ public class AddPlayerHandler {
 
 	@Execute
 	public void execute(BowlingDataService dataService) {
-		League leage = dataService.getLeage();
-		// Task: get editing domain
-		// Task: create AddCommand
+		League league = dataService.getLeage();
+		// Task: get editing domain from dataService
+		// Task: create AddCommand for adding a Player to league
 		// Task: execute AddCommand on the editing domain's command stack
 		EditingDomain editingDomain = dataService.getEditingDomain();
-		Command command = AddCommand.create(editingDomain, leage, LEAGUE__PLAYERS, BOWLING_FACTORY.createPlayer());
+		Command command = AddCommand.create(editingDomain, league, LEAGUE__PLAYERS, BOWLING_FACTORY.createPlayer());
 		editingDomain.getCommandStack().execute(command);
 	}
 
