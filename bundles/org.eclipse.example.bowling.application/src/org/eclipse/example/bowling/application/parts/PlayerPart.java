@@ -70,7 +70,6 @@ public class PlayerPart {
 
 	private Player player;
 	private DataBindingContext databindingContext;
-	private AdapterImpl nameAdapter;
 	private ComposedAdapterFactory composedAdapterFactory;
 
 	@PostConstruct
@@ -125,12 +124,7 @@ public class PlayerPart {
 		databindingContext.bindValue(txtNameObservable, playerNameObservable);
 
 		// Task: add data binding for comboGender
-		databindingContext.bindValue(ViewerProperties.singleSelection().observe(comboGender),
-				EMFEditProperties.value(editingDomain, PLAYER__GENDER).observe(player));
-
 		// Task: add data binding for txtHeight
-		databindingContext.bindValue(txtModifyPropery.observeDelayed(DELAY, txtHeight),
-				EMFEditProperties.value(editingDomain, PLAYER__HEIGHT).observe(player));
 
 		EMFUpdateValueStrategy stringToDateStrategy = new EMFUpdateValueStrategy();
 		stringToDateStrategy.setConverter(new StringToDateConverterWithDateFormat());
@@ -173,15 +167,6 @@ public class PlayerPart {
 		this.player = player;
 		part.setLabel(this.player.getName());
 		// Task: keep part label in sync with player's name
-		nameAdapter = new AdapterImpl() {
-			@Override
-			public void notifyChanged(Notification msg) {
-				if (PLAYER__NAME.equals(msg.getFeature())) {
-					part.setLabel(msg.getNewStringValue());
-				}
-			}
-		};
-		this.player.eAdapters().add(nameAdapter);
 	}
 
 	@PreDestroy
@@ -194,9 +179,6 @@ public class PlayerPart {
 		}
 		if (databindingContext != null) {
 			databindingContext.dispose();
-		}
-		if (player != null) {
-			player.eAdapters().remove(nameAdapter);
 		}
 	}
 

@@ -8,10 +8,6 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.example.bowling.League;
 import org.eclipse.example.bowling.dataservice.BowlingDataService;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -25,7 +21,6 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 	private EPartService partService;
 
 	private TreeViewer viewer;
-	private ComposedAdapterFactory composedAdapterFactory;
 
 	@Inject
 	public LeagueNavigatorPart(EPartService partService) {
@@ -38,13 +33,7 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 		viewer = new TreeViewer(parent, SWT.SINGLE);
 
 		// Task: set content and label provider
-		composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		viewer.setContentProvider(new AdapterFactoryContentProvider(composedAdapterFactory));
-		viewer.setLabelProvider(new AdapterFactoryLabelProvider(composedAdapterFactory));
-
 		// Task: set input provider
-		League league = dataService.getLeage();
-		viewer.setInput(league);
 
 		enableDragAndDrop(viewer, dataService.getEditingDomain());
 
@@ -60,9 +49,6 @@ public class LeagueNavigatorPart extends AbstractNavigatorPart {
 
 	@PreDestroy
 	public void dispose() {
-		if (composedAdapterFactory != null) {
-			composedAdapterFactory.dispose();
-		}
 	}
 
 	public void setFocus() {
